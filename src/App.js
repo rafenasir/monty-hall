@@ -1,10 +1,13 @@
 import "./App.css";
-import StartGameButton from "./components/StartGameButton";
+// import StartGameButton from "./components/StartGameButton";
+import DialogueBox from "./components/DialogueBox";
 
 function App() {
   return (
     <div className="App">
-      <StartGameButton />
+      <div className="App-header">
+        <DialogueBox />
+      </div>
     </div>
   );
 }
