@@ -6,9 +6,16 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import MenuItem from "@mui/material/MenuItem";
+import useQuery from "@tanstack/react-query";
 
+const filters = [
+  { value: "Yes", label: "Want To Switch" },
+  { value: "No", label: "Don't Want to Switch" },
+];
 export default function DialogueBox() {
   const [open, setOpen] = useState(false);
+  const [switchValue, setSwitchValue] = useState("No");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -16,6 +23,10 @@ export default function DialogueBox() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleSwitch = (e) => {
+    setSwitchValue(e.target.value);
+    console.log(switchValue);
   };
 
   return (
@@ -28,9 +39,10 @@ export default function DialogueBox() {
         <DialogContent>
           <DialogContentText>
             Select how many games you want to simulate and do you want to switch
-            the box or not.
+            the box or not by default the this will not switch.
           </DialogContentText>
           <TextField
+            select
             autoFocus
             margin="dense"
             id="name"
@@ -38,13 +50,20 @@ export default function DialogueBox() {
             type="email"
             fullWidth
             variant="standard"
-          />
+            onChange={handleSwitch}
+          >
+            {filters.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             autoFocus
+            type="number"
             margin="dense"
             id="name"
             label="Number of Games"
-            type="email"
             fullWidth
             variant="standard"
           />
