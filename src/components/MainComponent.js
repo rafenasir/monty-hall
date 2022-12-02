@@ -8,7 +8,7 @@ export default function MainComponent() {
   const handleClickOpen = () => {};
   return (
     <Box>
-      <Button onClick={handleClickOpen}>Start Game</Button>
+      <Button onClick={handleClickOpen}>Start Game 1</Button>
     </Box>
   );
 }
