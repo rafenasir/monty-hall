@@ -5,10 +5,17 @@ import DialogueBox from "./DialogueBox";
 export default function MainComponent() {
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {};
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   return (
     <Box>
       <Button onClick={handleClickOpen}>Start Game 1</Button>
+      {open ? <DialogueBox /> : null}
     </Box>
   );
 }
