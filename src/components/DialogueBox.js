@@ -21,8 +21,8 @@ export default function DialogueBox() {
     switchNeeded: switchValue,
     number: numberOfGames,
     queryFn: () =>
-      fetch("https://api.github.com/repos/tannerlinsley/react-query").then(
-        (res) => res.json()
+      fetch("https://montyhall-qliro.azurewebsites.net/game").then((res) =>
+        res.json()
       ),
   });
 
