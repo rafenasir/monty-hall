@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import MenuItem from "@mui/material/MenuItem";
-import useQuery from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 const filters = [
   { value: "Yes", label: "Want To Switch" },
@@ -16,6 +16,15 @@ const filters = [
 export default function DialogueBox() {
   const [open, setOpen] = useState(false);
   const [switchValue, setSwitchValue] = useState("No");
+  const [numberOfGames, setNumberOfGames] = useState(0);
+  const { isLoading, isError, data, error } = useQuery({
+    switchNeeded: switchValue,
+    number: numberOfGames,
+    queryFn: () =>
+      fetch("https://montyhall-qliro.azurewebsites.net/game").then((res) =>
+        res.json()
+      ),
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,6 +36,12 @@ export default function DialogueBox() {
   const handleSwitch = (e) => {
     setSwitchValue(e.target.value);
     console.log(switchValue);
+  };
+  const handleNumber = (e) => {
+    setNumberOfGames(e.target.value);
+  };
+  const fetchResult = () => {
+    //fetch API here after uploading the backend
   };
 
   return (
@@ -66,11 +81,19 @@ export default function DialogueBox() {
             label="Number of Games"
             fullWidth
             variant="standard"
+            onChange={handleNumber}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Submit</Button>
+          <Button
+            onClick={() => {
+              fetchResult();
+              handleClose();
+            }}
+          >
+            Submit
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
